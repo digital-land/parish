@@ -47,7 +47,7 @@
 
 {% set areaproperties %}
 {% for i in row.keys() %}
-{% if i not in ["id", "resource", "geometry", "has_geometry", "geometry_path", "slug"] %}
+{% if i not in ["id", "resource", "geometry", "has_geometry", "geometry_url", "slug"] %}
 <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
     {{ i }}
@@ -56,6 +56,19 @@
     {% if i == "organisation" %}
     <a href="https://digital-land.github.io/organisation/{{row[i]|replace(':','/')}}" class="govuk-link">{{ row[i]|organisation_id_to_name }}</a>
     <span title="Key in organisation dataset: {{ row[i] }}" class="govuk-!-font-size-16 secondary-text data-reference">(<span class="govuk-visually-hidden">Key in the organisation dataset is </span>{{ row[i] }})</span>
+    {% elif i == "geographies" %}
+      {% set geography_url = row[i]|geography_to_url %}
+      {% set geography_name = row[i]|geography_to_name %}
+      {% if geography_url != None %}
+        <a href={{ geography_url }} class="govuk-link">
+      {% endif %}
+        {{ geography_name }}
+      {% if geography_url != None %}
+        </a><br>
+      {% endif %}
+      {% if geography_name != row[i] %}
+        <span title="Geography identifier: {{ row[i] }}" class="govuk-!-font-size-16 secondary-text data-reference">(<span class="govuk-visually-hidden">Geography identifier is </span>{{ row[i] }})</span>
+      {% endif %}
     {% else %}
     {{ row[i] }}
     {% endif %}
@@ -83,7 +96,7 @@
     "id": "aMap",
     "classes": "govuk-!-margin-top-4 govuk-!-margin-bottom-2",
     "attributes": {
-        "data-geojson-urls": row["geometry_path"]
+        "data-geojson-urls": row["geometry_url"]
     },
     "height": "460"
 }) }}
