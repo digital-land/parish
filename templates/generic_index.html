@@ -1,0 +1,45 @@
+{%- extends "digital-land-frontend/dlf-base.html" %}
+{%- from "digital-land-frontend/components/map/macro.html" import dlMap %}
+
+{%- block beforeContent -%}
+    {{ super() }}
+
+    {{- govukBreadcrumbs({
+    "items": [
+        {
+        "text": "Digital Land",
+        "href": "/"
+        } ] + breadcrumb
+    }) -}}
+{%- endblock -%}
+
+{% block content %}
+
+<h1 class="govuk-heading-xl">{{ data_type|capitalize }}</h1>
+
+{# <p class="govuk-body">Showing {{ index['count'] }} records from {{ index['organisation']|length }} organisations.</p> #}
+
+<div>
+    <!-- <ul class="govuk-list govuk-list--bullet"> -->
+    <table>
+    {%- for item in index['items'] %}
+    {%- set ns = namespace(row_name="") %}
+    {# {% if row['site'] %}
+      {% set ns.row_name = row['site'] %}
+        {% if row['site-address'] %}
+        {% set ns.row_name = ns.row_name + ", " + row['site-address'] %}
+        {% endif %}
+      {% set ns.row_name = ns.row_name + " (" + row['slug']|clean_slug + ")" %}
+    {% elif row['name'] %}
+      {% set ns.row_name = row['slug']|clean_slug + " - " + row['name'] %}
+    {% else %}
+      {% set ns.row_name = row['slug']|clean_slug %}
+      {% endif %} #}
+      <tr><td><a href="{{ item['href'] }}">{{ item['reference'] }}</a></td><td> {{ item['text'] }}</td></tr>
+    {%- endfor %}
+    </table>
+</ul>
+</div>
+
+
+{% endblock content %}
