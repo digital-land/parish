@@ -15,11 +15,19 @@ env:
   DLB_BOT_EMAIL: ${{ secrets.DLB_BOT_EMAIL }}
   DLB_BOT_TOKEN: ${{ secrets.DLB_BOT_TOKEN }}
   DLB_BOT_USERNAME: ${{ secrets.DLB_BOT_USERNAME }}
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Notify slack
+      id: slack
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: dl-github
+        status: STARTED
+        color: good
     - uses: actions/checkout@v2
       with:
         submodules: true
