@@ -64,18 +64,18 @@ jobs:
 
     - name: Notify slack success
       if: success()
-      id: slack
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
+        message_id: ${{ steps.slack.outputs.message_id }}
         channel: dl-github
         status: SUCCESS
         color: good
 
     - name: Notify slack fail
       if: failure()
-      id: slack
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
+        message_id: ${{ steps.slack.outputs.message_id }}
         channel: dl-github
         status: FAILED
         color: dangers
