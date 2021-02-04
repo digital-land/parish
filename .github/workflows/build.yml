@@ -21,19 +21,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Notify slack
+
+    - name: Notify slack started
       id: slack
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
-        channel: "#dl-github"
+        channel: dl-github
         status: STARTED
         color: good
+
     - uses: actions/checkout@v2
       with:
         submodules: true
+
     - uses: actions/setup-python@v2
       with:
         python-version: 3.8
+
     - name: Setup git
       run: |
         git config user.email "${DLB_BOT_EMAIL}"
@@ -56,4 +60,24 @@ jobs:
       run: make render
 
     - name: Commit docs
-      run: make commit-docs
+      run: make commit-doc
+
+    - name: Notify slack success
+      if: success()
+      # env:
+      #   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: app-alerts
+        status: SUCCESS
+        color: good
+
+    - name: Notify slack fail
+      if: failure()
+  # env:
+  #   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: app-alerts
+        status: FAILED
+        color: dangers
