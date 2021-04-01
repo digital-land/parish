@@ -6,14 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <link rel="manifest" href="/site.webmanifest">
-      <link rel="shortcut icon" sizes="48x48" href="/images/favicon.ico" type="image/x-icon">
-      <link rel="shortcut icon" sizes="32x32" href="/images/favicon-32x32.png" type="image/png">
-      <link rel="shortcut icon" sizes="16x16" href="/images/favicon-16x16.png" type="image/png">
-      <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="shortcut icon" sizes="48x48" href="/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" sizes="32x32" href="/images/favicon-32x32.png" type="image/png">
+<link rel="shortcut icon" sizes="16x16" href="/images/favicon-16x16.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+	<meta name="digital-land:template" content="page-per-thing/record.html">
 
-<meta name="dl-template" content="dlf-base.html">	<link href="https://digital-land.github.io/stylesheets/dl-frontend.css" rel="stylesheet" />
-<script src="https://digital-land.github.io/javascripts/dl-maps.js"></script>    <meta property="og:image" content="/images/govuk-opengraph-image.png">
+<!-- should make this optional, no need to load if not showing a map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin="" />
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
+
+<!-- assets needed for fullscreen maps -->
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+<!-- script needed for recentring map -->
+<script src="https://digital-land.github.io/javascripts/Leaflet.recentre.js"></script>
+
+<script src="https://digital-land.github.io/javascripts/dl-maps.js"></script>	<link href="https://digital-land.github.io/stylesheets/dl-frontend.css" rel="stylesheet" />    <meta property="og:image" content="/images/govuk-opengraph-image.png">
   </head>
   <body class="govuk-template__body ">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
@@ -109,16 +126,39 @@
 
 <span class="govuk-caption-xl">parish</span>
     <h1 class="govuk-heading-xl">Newton Poppleford and Harpford</h1>
+<div class="govuk-tabs" data-module="dlf-subnav">
+    <h2 class="govuk-tabs__title">
+      Contents
+    </h2>
+    <nav class="dlf-subnav" aria-label="Sub navigation">
+        <ul class="dlf-subnav__list">
+            <li class="dlf-subnav__list-item dlf-subnav__list-item--selected">
+                <a class="dlf-subnav__list-item__link" href="#record" data-module-sub-nav="tab">
+                Record
+                </a>
+            </li>
+            <li class="dlf-subnav__list-item">
+                <a class="dlf-subnav__list-item__link" href="#history" data-module-sub-nav="tab">
+                History
+                </a>
+            </li></ul>
+    </nav>
+
+<div id="record">
 <div class="govuk-grid-row">    <div class="govuk-grid-column-two-thirds"><article class="data-record govuk-!-margin-bottom-6">
     <h4 class="govuk-heading-s data-record__identifier">#/parish/E04002976</h4>
     <dl class="govuk-summary-list data-record__properties">            <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">geography
-            </dt>
-            <dd class="govuk-summary-list__value">                parish:E04002976            </dd>
-        </div>        <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">name
             </dt>
             <dd class="govuk-summary-list__value">                Newton Poppleford and Harpford            </dd>
+        </div>        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">reference
+            </dt>
+            <dd class="govuk-summary-list__value">                E04002976            </dd>
+        </div>        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">geography
+            </dt>
+            <dd class="govuk-summary-list__value">                parish:E04002976            </dd>
         </div>        <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">organisation
             </dt>
@@ -126,47 +166,25 @@
 <span title="Organisation identifier: government-organisation:D303" class="govuk-!-font-size-16 secondary-text data-reference">(<span class="govuk-visually-hidden">Organisation identifier is </span>government-organisation:D303)</span>
             </dd>
         </div>        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">reference
-            </dt>
-            <dd class="govuk-summary-list__value">                E04002976            </dd>
-        </div>        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">documentation-url
-            </dt>
-            <dd class="govuk-summary-list__value">                            </dd>
-        </div>        <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">entry-date
             </dt>
-            <dd class="govuk-summary-list__value">                2021-01-11            </dd>
-        </div>        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">start-date
-            </dt>
-            <dd class="govuk-summary-list__value">                            </dd>
-        </div>        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">end-date
-            </dt>
-            <dd class="govuk-summary-list__value">                            </dd>
+            <dd class="govuk-summary-list__value">                2021-02-12            </dd>
         </div>    
-    </dl>    <footer class="govuk-!-font-size-16 data-record__resource">From resource <a href="https://github.com/digital-land/parish-collection/tree/main/transformed/parish/05280773e379a6f1ae29013de610201561de289423a476497069dc1b1297520f.csv" class="govuk-link">05280773e379a6f1a...</a></footer>
-</article>
+    </dl></article>
 </div>
             
 </div>
 
+<p class="govuk-body">
+    <a href="https://digital-land.github.io/specification/schema/geography/">View the geography schema</a>
+</p>
 
-    <!-- include css and js for LeafletJS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-    crossorigin=""></script>
 
     <h2 class="govuk-heading-m">Geographical area</h2>
 
     <div class="dl-map__wrapper"><div 
         class="dl-map govuk-!-margin-top-4 govuk-!-margin-bottom-2"
-        id="aMap"
+        id="dlMap"
         data-module="boundary-map"
         style="height: 460px;" data-geojson-urls="geometry.geojson"   
     >
@@ -177,9 +195,67 @@
 
     <div class="govuk-!-margin-top-2">
         <a class="dl-page-action-button" href="geometry.geojson">Download geojson</a>
-    </div>        </main>
+    </div></div>
+
+<div id="history"><h2 class="govuk-heading-m govuk-!-margin-top-9">History</h2>
+<div class="data-table__wrapper" data-module="data-table">
+    <div class="data-table-left-shadow with-transition"></div>
+    <div class="wide-table">
+        <table class="data-table">
+    <thead>
+        <tr>
+            <th>entry-date</th>
+            <th>resource</th>
+            <th>line</th>
+            <th>name</th>
+            <th>organisation</th>
+            <th>reference</th>
+            <th>geometry</th>
+            <th>geography</th>
+        </tr>
+    </thead>
+    <tbody>        <tr>
+            <td>2021-02-12</td>
+            <td><a href="https://github.com/digital-land/parish-collection/tree/main/transformed/parish/abba36cb6dc0396e50358a9461382dd5756e79871284d1cc2a959ecdb1ba0a69.csv#L2069">abba36cb6dc0...</a></td>
+            <td>2068</td>
+                <td>Newton Poppleford and Harpford</td> 
+                <td>government-organisation:D303</td> 
+                <td>E04002976</td> 
+                <td class="data-table__notes-cell data-table__cell--min-width-4">
+                    <details class="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      See WKT
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+    MULTIPOLYGON (((-3.269078 50.708927,-3.269127 50.709009,-3.269199 50.709055,-3.269807 50.709242,-3.270235 50.709519,-3.270387 50.709682,-3.270422 50.709766,-3.270436 50.709865,-3.270372 50.710069,-3.270432 50.710145,-3.270544 50.710183,-3.270837 50.710174,-3.270989 50.710204,-3.271269 50.710382,-3.271721 50.710347,-3.272205 50.710164,-3.272671 50.710083,-3.273516 50.710271,-3.274463 50.710409,-3.275821 50.710443,-3.276050 50.710477,-3.276830 50.710456,-3.277286 50.710492,-3.279019 50.710699,-3.281873 50.710907,-3.281875 50.710970,-3.282490 50.710982,-3.283951 50.711124,-3.284597 50.711127,-3.286051 50.711344,-3.287121 50.711396,-3.287988 50.711476,-3.288554 50.711424,-3.289513 50.711427,-3.290499 50.711645,-3.290751 50.711798,-3.290717 50.712113,-3.290728 50.712359,-3.290644 50.712470,-3.290383 50.712568,-3.290367 50.712651,-3.290408 50.712896,-3.290855 50.712995,-3.291540 50.713077,-3.291996 50.713191,-3.292383 50.713586,-3.292584 50.713747,-3.292513 50.713790,-3.292642 50.713993,-3.292776 50.714096,-3.293119 50.714145,-3.293636 50.714134,-3.293854 50.714388,-3.293930 50.714585,-3.293991 50.715151,-3.294019 50.715242,-3.294111 50.715343,-3.293454 50.715461,-3.293372 50.715505,-3.292984 50.716706,-3.293005 50.716757,-3.293161 50.716853,-3.293380 50.716950,-3.293460 50.716918,-3.293888 50.717334,-3.294727 50.716945,-3.295771 50.716830,-3.296942 50.716810,-3.297454 50.716750,-3.298137 50.716732,-3.299358 50.716746,-3.300382 50.716849,-3.302141 50.716814,-3.303764 50.716687,-3.306652 50.716748,-3.307613 50.716604,-3.308197 50.716459,-3.308424 50.716446,-3.309112 50.716555,-3.310153 50.716816,-3.311126 50.716970,-3.311963 50.716993,-3.314292 50.717262,-3.314715 50.717296,-3.315571 50.717303,-3.316050 50.717385,-3.316327 50.717500,-3.316900 50.718221,-3.317763 50.719007,-3.317839 50.719122,-3.317981 50.719696,-3.318086 50.719794,-3.318414 50.719927,-3.318680 50.719885,-3.319085 50.720182,-3.319540 50.720012,-3.319761 50.720027,-3.320310 50.719906,-3.320386 50.719985,-3.320894 50.719851,-3.321260 50.719880,-3.321632 50.719954,-3.322144 50.719980,-3.322743 50.720129,-3.323377 50.720344,-3.324833 50.720983,-3.326012 50.721371,-3.326358 50.721606,-3.326738 50.721689,-3.327189 50.721695,-3.327401 50.721895,-3.327527 50.721940,-3.329095 50.722134,-3.329550 50.722338,-3.329935 50.722424,-3.330109 50.722504,-3.330304 50.722631,-3.330530 50.722876,-3.330870 50.723413,-3.331115 50.723726,-3.331863 50.724895,-3.331929 50.724867,-3.331953 50.724580,-3.331920 50.723609,-3.331982 50.723297,-3.332146 50.723050,-3.332403 50.721953,-3.332654 50.721424,-3.332646 50.720645,-3.332729 50.720114,-3.332750 50.719758,-3.333494 50.718885,-3.335045 50.716664,-3.335572 50.715641,-3.336035 50.714895,-3.336078 50.714630,-3.336069 50.714530,-3.336030 50.714513,-3.335979 50.714362,-3.335800 50.713288,-3.335606 50.712499,-3.335428 50.711975,-3.335103 50.711184,-3.334696 50.710422,-3.334504 50.709903,-3.334455 50.709627,-3.334332 50.709375,-3.334011 50.708508,-3.333846 50.707936,-3.333654 50.706756,-3.333531 50.704872,-3.333530 50.703526,-3.333692 50.701734,-3.333946 50.700135,-3.333866 50.700099,-3.334126 50.699190,-3.335103 50.699359,-3.337266 50.699910,-3.337617 50.700024,-3.337108 50.699734,-3.335901 50.698454,-3.334646 50.697241,-3.333986 50.696628,-3.332063 50.694998,-3.331583 50.694682,-3.330663 50.694191,-3.330108 50.693730,-3.329643 50.693231,-3.329091 50.692472,-3.328252 50.691603,-3.327451 50.690895,-3.327309 50.690799,-3.327196 50.690762,-3.327140 50.690672,-3.326748 50.690537,-3.326154 50.690434,-3.325294 50.690380,-3.324340 50.690144,-3.323947 50.690090,-3.321827 50.690240,-3.321433 50.690453,-3.320483 50.690565,-3.317793 50.690672,-3.316809 50.690822,-3.315708 50.690884,-3.314870 50.691084,-3.313780 50.691050,-3.312707 50.690939,-3.312674 50.691083,-3.312673 50.691490,-3.312747 50.691944,-3.311422 50.692452,-3.311068 50.692498,-3.308891 50.692468,-3.307300 50.692537,-3.306063 50.692699,-3.305841 50.692706,-3.305632 50.692673,-3.305185 50.692775,-3.304450 50.693077,-3.303431 50.693314,-3.303364 50.693397,-3.303377 50.693976,-3.303346 50.694289,-3.303432 50.694667,-3.303082 50.694765,-3.302773 50.694791,-3.300147 50.694679,-3.299344 50.694678,-3.298209 50.694625,-3.297839 50.694567,-3.296191 50.694469,-3.296096 50.694722,-3.296071 50.694928,-3.296129 50.695448,-3.296092 50.696231,-3.295821 50.697287,-3.294214 50.697016,-3.293500 50.696953,-3.293110 50.696966,-3.292841 50.697554,-3.292756 50.697635,-3.292600 50.697685,-3.292468 50.697985,-3.292404 50.698051,-3.292322 50.698081,-3.290797 50.697901,-3.290566 50.697833,-3.289974 50.697780,-3.288165 50.697845,-3.287535 50.697780,-3.287933 50.697281,-3.288272 50.697089,-3.288654 50.696946,-3.288875 50.696734,-3.289233 50.696620,-3.289616 50.696448,-3.289921 50.696258,-3.290375 50.695873,-3.291509 50.695361,-3.292496 50.695037,-3.292807 50.695088,-3.293163 50.695217,-3.293580 50.695271,-3.293853 50.695236,-3.293923 50.695189,-3.293953 50.695088,-3.293831 50.694848,-3.293849 50.694817,-3.293803 50.694585,-3.293739 50.694492,-3.293783 50.694114,-3.293686 50.693990,-3.293655 50.693894,-3.293653 50.693349,-3.293721 50.692950,-3.293879 50.692612,-3.294417 50.692148,-3.294293 50.691597,-3.294024 50.691000,-3.293984 50.690734,-3.294000 50.690527,-3.294081 50.690401,-3.294137 50.690216,-3.294230 50.690102,-3.294873 50.689538,-3.295061 50.689300,-3.295095 50.689126,-3.295173 50.689000,-3.295219 50.688830,-3.295566 50.688015,-3.295729 50.687815,-3.295911 50.687693,-3.296065 50.687486,-3.296144 50.687115,-3.296218 50.686967,-3.296614 50.686598,-3.297042 50.686319,-3.296089 50.685949,-3.296116 50.685690,-3.296054 50.685631,-3.294827 50.685351,-3.294466 50.685240,-3.293964 50.684947,-3.293651 50.684698,-3.293511 50.684485,-3.293504 50.684023,-3.293472 50.683843,-3.293497 50.683722,-3.293678 50.683493,-3.294028 50.683386,-3.293924 50.682893,-3.293778 50.682708,-3.293643 50.682600,-3.293541 50.682389,-3.293551 50.682229,-3.293031 50.682329,-3.292373 50.682383,-3.291193 50.682447,-3.290803 50.682418,-3.289753 50.682749,-3.289281 50.682784,-3.289315 50.682144,-3.289214 50.681779,-3.288724 50.681979,-3.288430 50.682034,-3.288332 50.682035,-3.287894 50.681916,-3.287572 50.681881,-3.285011 50.681883,-3.284506 50.682098,-3.284215 50.682164,-3.283443 50.682089,-3.282729 50.681970,-3.281971 50.681989,-3.281805 50.682014,-3.281574 50.682140,-3.281212 50.682236,-3.280714 50.682246,-3.280244 50.682344,-3.279496 50.682435,-3.278778 50.682464,-3.278443 50.682402,-3.277799 50.682131,-3.277618 50.682137,-3.277034 50.682041,-3.276900 50.682004,-3.276725 50.681886,-3.276133 50.681731,-3.275421 50.681608,-3.275130 50.681590,-3.273837 50.683077,-3.273144 50.683758,-3.271425 50.685163,-3.271163 50.685465,-3.271100 50.685662,-3.270733 50.687647,-3.270623 50.688072,-3.270484 50.688339,-3.270261 50.689358,-3.270208 50.689381,-3.270188 50.689440,-3.270171 50.689909,-3.270019 50.690332,-3.269590 50.691016,-3.268783 50.692077,-3.268162 50.692836,-3.268346 50.693505,-3.268620 50.693899,-3.268714 50.694242,-3.268811 50.694445,-3.270016 50.695385,-3.270165 50.695592,-3.270376 50.695761,-3.270566 50.695871,-3.271446 50.696253,-3.271600 50.696411,-3.272083 50.696689,-3.273328 50.697226,-3.273459 50.697347,-3.274862 50.697992,-3.275193 50.698298,-3.274892 50.698496,-3.274642 50.698723,-3.274280 50.698954,-3.272998 50.699661,-3.273282 50.699853,-3.273633 50.699966,-3.273340 50.700069,-3.272797 50.700418,-3.271670 50.700945,-3.271661 50.701065,-3.271743 50.701494,-3.271482 50.701559,-3.270725 50.701590,-3.270710 50.701723,-3.270836 50.702120,-3.270728 50.702132,-3.270554 50.702219,-3.270121 50.702343,-3.270158 50.702446,-3.269951 50.702440,-3.270071 50.702873,-3.270302 50.703134,-3.270406 50.703505,-3.270382 50.703581,-3.270169 50.703648,-3.269638 50.703645,-3.269022 50.703756,-3.268393 50.703983,-3.268070 50.704155,-3.268418 50.704328,-3.268875 50.704670,-3.269528 50.705030,-3.269810 50.705260,-3.270220 50.705332,-3.271062 50.705639,-3.271762 50.705752,-3.271759 50.706111,-3.271408 50.706180,-3.269777 50.706740,-3.270032 50.707111,-3.270025 50.707400,-3.269877 50.707572,-3.269699 50.707871,-3.269235 50.708344,-3.269123 50.708558,-3.269075 50.708765,-3.269078 50.708927)))
+  </div>
+</details>
+                </td>
+                <td>parish:E04002976</td> 
+        </tr>    </tbody>
+</table>
+
+    </div>
+    <div class="data-table-right-shadow visible with-transition"></div>
+</div>
+</div>        </main>
       </div>
 
+    <div class="dlf-feedback__wrapper">
+    <div class="dlf-feedback">
+    <div class="dlf-feedback__prompt">
+        <div class="dlf-feedback__prompt-content">
+            <span class="dlf-feedback__prompt-content__text">Spotted an issue? Let us know so we can improve the data.</span>
+        </div>
+        <div class="dlf-feedback__prompt-action">
+            <a href="mailto:digitalLand@communities.gov.uk?subject=Feedback on (parish:E04002976) Newton Poppleford and Harpford -- parish" class="govuk-button dlf-feedback__prompt__link">There is something wrong with the data</a>
+        </div>
+    </div>
+</div>
+
+</div>
 
 <footer class="govuk-footer " role="contentinfo"
 >
@@ -258,5 +334,16 @@
     const $mapElement = document.querySelector('[data-module="boundary-map"]')
     const mapComponent = new DLMaps.Map($mapElement).init({})
 </script>
-  </body>
+<script>
+    // Initialise back to top
+    var $data_tables = document.querySelectorAll('[data-module*="data-table"]')
+    $data_tables.forEach(data_table => {
+        new window.DLFrontend.ScrollableTables(data_table).init()
+    })
+</script>
+
+<script>
+    const $subNavTabs = document.querySelector('[data-module="dlf-subnav"]')
+    const subNavTabsComponent = new DLFrontend.SubNavTabs($subNavTabs).init({})
+</script>  </body>
 </html>
