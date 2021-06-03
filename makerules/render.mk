@@ -12,7 +12,9 @@ COLLECTION=$(DATASET)
 endif
 
 ifeq ($(DATASET_PATH),)
+ifeq ($(NO_DATASET),)
 DATASET_PATH=$(DATASET_DIR)$(DATASET).sqlite3
+endif
 endif
 
 ifeq ($(DATASET_URL),)
@@ -37,7 +39,7 @@ render:: $(TEMPLATE_FILES) $(SPECIFICATION_FILES) $(DATASET_FILES) $(DATASET_PAT
 ifneq ($(RENDER_COMMAND),)
 	$(RENDER_COMMAND)
 else
-	digital-land --pipeline-name $(DATASET) render --dataset-path $(DATASET_PATH)
+	digital-land --pipeline-name $(DATASET) render --dataset-path $(DATASET_PATH) $(RENDER_FLAGS)
 endif
 	@touch ./docs/.nojekyll
 
@@ -54,7 +56,7 @@ clobber-docs::
 	rm -rf $(DOCS_DIR)
 
 makerules::
-	curl -qsL '$(SOURCE_URL)/makerules/main/render.mk' > makerules/render.mk
+	curl -qfsL '$(SOURCE_URL)/makerules/main/render.mk' > makerules/render.mk
 
 commit-docs::
 	git add docs
@@ -65,7 +67,7 @@ commit-docs::
 ifneq ($(DATASET_PATH),)
 $(DATASET_PATH):
 	mkdir -p $(DATASET_DIR)
-	curl -qsL $(DATASET_URL) > $(DATASET_PATH)
+	curl -qfsL $(DATASET_URL) > $(DATASET_PATH)
 endif
 
 # TBD: remove this rule
