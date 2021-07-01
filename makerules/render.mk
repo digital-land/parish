@@ -3,8 +3,12 @@
 	server
 
 
+ifeq ($(VIEW_MODEL),)
+VIEW_MODEL=dataset/view_model.sqlite3
+endif
+
 ifeq ($(DATASET),)
-DATASET=$(shell basename -s .git `git config --get remote.origin.url`)
+DATASET=$(REPOSITORY)
 endif
 
 ifeq ($(COLLECTION),)
@@ -18,7 +22,7 @@ endif
 endif
 
 ifeq ($(DATASET_URL),)
-DATASET_URL='https://github.com/digital-land/$(COLLECTION)-collection/raw/main/dataset/$(DATASET).sqlite3'
+DATASET_URL='https://collection-dataset.s3.eu-west-2.amazonaws.com/$(COLLECTION)-collection/dataset/$(DATASET).sqlite3'
 endif
 
 ifeq ($(DATASET_DIR),)
@@ -31,9 +35,17 @@ endif
 
 TEMPLATE_FILES=$(wildcard templates/*)
 
+$(VIEW_MODEL):
+ifeq ($(RENDER_FLAGS),"--cross-reference")
+	curl -qfsL 'http://datasette-demo.digital-land.info/view_model.db' > $@
+else
+	touch $@
+endif
+
+
 second-pass:: render
 
-render:: $(TEMPLATE_FILES) $(SPECIFICATION_FILES) $(DATASET_FILES) $(DATASET_PATH)
+render:: $(TEMPLATE_FILES) $(SPECIFICATION_FILES) $(DATASET_FILES) $(DATASET_PATH) $(VIEW_MODEL)
 	@-rm -rf $(DOCS_DIR)
 	@-mkdir -p $(DOCS_DIR)
 ifneq ($(RENDER_COMMAND),)
@@ -62,8 +74,6 @@ commit-docs::
 	git add docs
 	git diff --quiet && git diff --staged --quiet || (git commit -m "Rebuilt docs $(shell date +%F)"; git push origin $(BRANCH))
 
-# TBD: use data package
-# -- this assumes pages are in a different repository to the pipeline
 ifneq ($(DATASET_PATH),)
 $(DATASET_PATH):
 	mkdir -p $(DATASET_DIR)
